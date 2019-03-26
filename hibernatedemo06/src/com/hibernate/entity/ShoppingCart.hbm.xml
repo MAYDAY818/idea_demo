@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hibernate.entity">
+    <class name="ShoppingCart" table="shopping_cart" >
+        <id name="id" type="integer" column="id">
+            <generator class="native">
+            </generator>
+        </id>
+        <many-to-one name="customer" class="Customer" cascade="all" column="customer_id" unique="true"></many-to-one>
+        <set name="goodSet" table="shopping" inverse="true">
+            <key column="good_id"></key>
+            <many-to-many class="Good" column="good_id">
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

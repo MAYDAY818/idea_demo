@@ -1,0 +1,11 @@
+server:
+  port: 8080
+student:
+  name: my name is jingfei xiao
+  age: 22
+  spring:
+    mvc:
+      view:
+        prefix: /WEB-INF/views
+        suffix: .jsp
+

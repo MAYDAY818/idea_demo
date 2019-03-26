@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hibernate.entity">
+    <class name="Good" table="good">
+        <id name="id" type="int">
+            <generator class="identity"/>
+        </id>
+        <property name="name" type="java.lang.String">
+        </property>
+        <property name="price" type="double">
+        </property>
+        <property name="inventory" type="java.lang.Integer">
+        </property>
+        <property name="describes" type="java.lang.String">
+        </property>
+        <set name="shoppingCarts" table="shopping" inverse="false">
+            <key column="good_id"></key>
+            <many-to-many class="ShoppingCart" column="shopping_cart_id">
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
