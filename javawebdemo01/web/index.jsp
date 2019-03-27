@@ -47,14 +47,14 @@
     function getContents(){
       //首先获得用户的输入内容，这里获得的是一个结点
       var content = document.getElementById("keyword");
-      if(content.value ==""){
+      if(content.value ==" "){
         return;
       }
 
       //向服务器发送内容，用到XmlHttp对象
       xmlHttp = createXMLHttp();
       //给服务器发送数据，escape()不加中文会有问题
-      var url = "search?keyword=" + escape(content.value);
+      var url = "http://localhost:8080/javawebdemo01/search?keyword=" + escape(content.value);
       //true表示js的脚本会在send()方法之后继续执行而不会等待来自服务器的响应
       xmlHttp.open("GET",url,true);
       //xmlHttp绑定回调方法，这个方法会在xmlHttp状态改变的时候调用,xmlHttp状态有0-4，
