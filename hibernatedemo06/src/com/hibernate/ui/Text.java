@@ -122,5 +122,59 @@ public class Text {
         List list=query.list();
     }
 
+    private void findAllGood(){
+        Session session=HibernateUtil.openSession();
+        Transaction transaction=session.beginTransaction();
+        Query query=session.createQuery("select good.name,good.price from Good good");
+        List list=((org.hibernate.query.Query) query).list();
+        System.out.println(list.toString());
+        transaction.commit();
+        session.close();
+    }
 
+    private void findAllGoodByOrder(){
+        Session session=HibernateUtil.openSession();
+        Transaction transaction=session.beginTransaction();
+        Query query=session.createQuery("from Good good order by price desc");
+        List list=((org.hibernate.query.Query) query).list();
+        System.out.println(list.toString());
+        transaction.commit();
+        session.close();
+    }
+
+    private void findGoodPriceIsHightAverage(){
+        Session session=HibernateUtil.openSession();
+        Transaction transaction=session.beginTransaction();
+        Query query=session.createQuery("from Good good where good.price > (select avg(g1.price) from Good g1)");
+        List list=((org.hibernate.query.Query) query).list();
+        System.out.println(list.toString());
+        transaction.commit();
+        session.close();
+    }
+
+    private void findAllCustomerBuyGood(){
+        Session session=HibernateUtil.openSession();
+        Transaction transaction=session.beginTransaction();
+        Query query=session.createQuery(" select cg.goods.goodsName,sum(cg.count) as num from ShoppingCart cg group by cg.goods order by num desc");
+        List list=((org.hibernate.query.Query) query).list();
+        System.out.println(list.toString());
+        transaction.commit();
+        session.close();
+    }
+    //
+
+    private void findGoodIsResult(){
+        Session session=HibernateUtil.openSession();
+        Transaction transaction=session.beginTransaction();
+        Query query=session.createQuery("from Good good ");
+        query.setFirstResult(0);
+        query.setMaxResults(2);
+        List<Good> list=((org.hibernate.query.Query) query).list();
+        for(Good good : list){
+            System.out.println(good.toString());
+        }
+        System.out.println(list.toString());
+        transaction.commit();
+        session.close();
+    }
 }
